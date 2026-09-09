@@ -49,6 +49,21 @@ get_ship_status
 
 Zones are **names only** (Bridge / Observatory / Cantina / Tech Bay / Cargo) — sector footages stay unlocked until posts are measured.
 
+
+## Run F.R.A.N.K. dry-run console
+
+```bash
+python3 -m frank
+```
+
+```text
+menu
+order root_beer
+confirm
+```
+
+Forced **dry-run** only: explicit `confirm` required; prints `would_pour` JSON; no pumps/GPIO/MQTT. `supervised-wet` is rejected. No face/RFID retention.
+
 ## Safety
 
 - No unsupervised pours — F.R.A.N.K. stays dry-run until you unlock wet tests.
@@ -61,7 +76,7 @@ Zones are **names only** (Bridge / Observatory / Cantina / Tech Bay / Cargo) —
 - `docs/` — lore placeholders for COSMOS RAG
 - `ship_core/` — Modelfile + identity
 - `orchestrator/` — tool-call sim loop
-- `frank/` — persona + pour schema (dry)
+- `frank/` — persona + pour schema + dry-run console (`python3 -m frank`)
 - `mqtt/` — topic map stub
 - `firmware/` — ESP32 notes only
 
