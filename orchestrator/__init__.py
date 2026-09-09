@@ -1,0 +1,1 @@
+"""Cosmic Voyager orchestrator stubs."""

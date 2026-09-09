@@ -1,0 +1,4 @@
+# Sim mode is stdlib-only. Add later:
+# ollama
+# paho-mqtt
+# faster-whisper

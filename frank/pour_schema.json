@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "F.R.A.N.K. dry-run order",
+  "type": "object",
+  "required": ["drink_id", "confirm", "mode"],
+  "properties": {
+    "drink_id": { "type": "string" },
+    "confirm": { "type": "boolean", "const": true },
+    "mode": { "type": "string", "enum": ["dry-run", "supervised-wet"] },
+    "gesture": { "type": "string" },
+    "face": { "type": "string" }
+  },
+  "additionalProperties": false
+}
