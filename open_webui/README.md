@@ -2,25 +2,25 @@
 
 SIM-only ship tools for local Open WebUI on SpaceshipDesktop. No actuators, pumps, or F.R.A.N.K. pours.
 
-## Prerequisites
+**Full daily ops:** [`docs/COSMOS-RUNBOOK.md`](../docs/COSMOS-RUNBOOK.md)
 
-- Ollama running with model `cosmos` (from `ship_core/Modelfile`)
-- Open WebUI on `http://127.0.0.1:8080` (`WEBUI_AUTH=False` is fine)
-- This repo checked out (e.g. `Documents\cosmic-voyager`)
-
-## 1. Start the tool server
+## Fast path (SpaceshipDesktop)
 
 ```powershell
 cd $env:USERPROFILE\Documents\cosmic-voyager
-python -m orchestrator.tool_server
+.\scripts\start-cosmos-stack.ps1
+.\scripts\cosmos-health.ps1
 ```
 
-- Health: http://127.0.0.1:8767/health
-- OpenAPI: http://127.0.0.1:8767/openapi.json
+Then http://127.0.0.1:8080 → model **`cosmos`** → enable **COSMOS Ship Tools** → chat.
 
-Leave this terminal open.
+## Prerequisites
 
-## 2. Register tools in Open WebUI
+- Ollama with model `cosmos` (`ollama create cosmos -f ship_core/Modelfile`)
+- Open WebUI on `http://127.0.0.1:8080` (`WEBUI_AUTH=False` is fine)
+- Repo at `Documents\cosmic-voyager`
+
+## Register tools (first time)
 
 ### Option A — OpenAPI tool server (Integrations)
 
@@ -33,18 +33,11 @@ Admin → Settings → Integrations (or External Tools) → add:
 | Auth | None |
 | Name | COSMOS Ship Tools (SIM) |
 
-Enable the connection.
+Enable the connection. Health: http://127.0.0.1:8767/health · OpenAPI: http://127.0.0.1:8767/openapi.json
 
 ### Option B — Workspace Python tool
 
 Workspace → Tools → create/import using `open_webui/cosmos_ship_tools.py` (same allowlisted ops; calls the local tool server).
-
-## 3. Chat
-
-1. Open http://127.0.0.1:8080
-2. Select model **`cosmos`** (or `cosmos:latest`)
-3. Enable **COSMOS Ship Tools** on the chat (tools picker / `+`)
-4. Ask e.g. `Set Cantina to NEBULA_PURPLE at 40` or `What's the ship status?`
 
 ## Allowlisted operations
 
@@ -55,16 +48,13 @@ Workspace → Tools → create/import using `open_webui/cosmos_ship_tools.py` (s
 - `set_alert_level`
 - `set_viewport_mode`
 
-## Restart cheat sheet (SpaceshipDesktop)
+## Manual start (if not using scripts)
 
 ```powershell
-# Ollama usually runs as a service after install
-
-# Tool server
 cd $env:USERPROFILE\Documents\cosmic-voyager
 python -m orchestrator.tool_server
 
-# Open WebUI (separate terminal)
+# separate terminal
 $env:OLLAMA_BASE_URL = "http://127.0.0.1:11434"
 $env:WEBUI_AUTH = "False"
 open-webui serve --host 127.0.0.1 --port 8080

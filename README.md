@@ -82,11 +82,14 @@ Forced **dry-run** only: explicit `confirm` required; prints `would_pour` JSON; 
 
 Owner: `JonaSkinny1`
 
-## COSMOS + Ollama (SpaceshipDesktop)
+## COSMOS desktop stack (SpaceshipDesktop)
 
-`ash
-ollama create cosmos -f ship_core/Modelfile
-python -m orchestrator.llm_bridge
-`
+Daily start + health + Open WebUI tools: [`docs/COSMOS-RUNBOOK.md`](docs/COSMOS-RUNBOOK.md)
 
-English in → allowlisted JSON tool out → sim state update. Still SIM only (no actuators / no F.R.A.N.K. pours).
+```powershell
+cd $env:USERPROFILE\Documents\cosmic-voyager
+.\scripts\start-cosmos-stack.ps1
+.\scripts\cosmos-health.ps1
+```
+
+After-work measure + optional check: [`AFTER-WORK-CHECKLIST.md`](AFTER-WORK-CHECKLIST.md)
