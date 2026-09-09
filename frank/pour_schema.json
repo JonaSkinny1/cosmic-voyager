@@ -4,11 +4,36 @@
   "type": "object",
   "required": ["drink_id", "confirm", "mode"],
   "properties": {
-    "drink_id": { "type": "string" },
-    "confirm": { "type": "boolean", "const": true },
-    "mode": { "type": "string", "enum": ["dry-run", "supervised-wet"] },
-    "gesture": { "type": "string" },
-    "face": { "type": "string" }
+    "drink_id": {
+      "type": "string",
+      "enum": [
+        "root_beer",
+        "cola",
+        "ginger_ale",
+        "sparkling_water",
+        "still_water",
+        "orange_soda"
+      ],
+      "description": "Allowlisted bottle/can SKUs for dry-run. No free-pour cocktails in this slice."
+    },
+    "confirm": {
+      "type": "boolean",
+      "const": true,
+      "description": "Must be true. Orders without explicit confirm are rejected."
+    },
+    "mode": {
+      "type": "string",
+      "enum": ["dry-run"],
+      "description": "This console only accepts dry-run. supervised-wet is not live."
+    },
+    "gesture": {
+      "type": "string",
+      "description": "Optional UI gesture id — not required for dry-run."
+    },
+    "notes": {
+      "type": "string",
+      "maxLength": 120
+    }
   },
   "additionalProperties": false
 }
