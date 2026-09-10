@@ -4,6 +4,8 @@ Daily ops for the local COSMOS stack: Ollama + tool server + Open WebUI.
 
 **Safety:** SIM only. No actuators, door locks, pumps, or F.R.A.N.K. pours. Allowlisted ship tools update in-memory sim state only.
 
+**Backlog:** Device power control (list/shutdown/wake) — see [`BACKLOG-device-power.md`](BACKLOG-device-power.md). Dry-run first; no live power until Jonathan unlocks a phase.
+
 ## Ports
 
 | Service     | Port  | Health / probe                                      |
