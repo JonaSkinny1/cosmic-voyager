@@ -1,6 +1,6 @@
 ﻿# Cosmic Voyager â€” Deck 01
 
-Local-first ship OS stubs for Jonathanâ€™s basement freighter (**Deck 01 / Cosmic Voyager**, Youngstown Outpost).
+Local-first ship OS stubs for Jonathanâ€™s basement freighter (**Deck 01 / Cosmic Voyager**, Ohio Outpost // Sol-3).
 
 | Role | Name |
 |------|------|
