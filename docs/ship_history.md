@@ -4,4 +4,4 @@ Cosmic Voyager — Deck 01. Fill from locked canon only. Prefer confirmed notes 
 
 ## Place branding (locked 2026-09-10)
 
-**Remove Youngstown altogether** from Cosmic Voyager / Deck 01 lore. Use **Ohio / Ohio Outpost // Sol-3** (or generic Sol-3 Earth) for any registry or place flavor. Hook A soft lean = Ohio / Sol-3 yardbird (history mix still unlocked).
+**Prior local city branding / YNG codes retired** from Cosmic Voyager / Deck 01 lore. Use **Ohio / Ohio Outpost // Sol-3** (or generic Sol-3 Earth) for any registry or place flavor. Hook A soft lean = Ohio / Sol-3 yardbird (history mix still unlocked).
