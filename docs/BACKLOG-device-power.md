@@ -23,7 +23,7 @@ Allowlisted SIM tools only (in-memory / log `would_power`):
 - Forced dry-run / SIM — no OS calls, no WoL packets, no HA/MQTT actuator publishes
 - Explicit **confirm** required on shutdown/wake
 - Allowlisted device ids only; reject unknown
-- Run [F.R.A.N.K. / COSMOS safety pass](../ — skill on Spaceship Build) before any later live enablement
+- Run the F.R.A.N.K. / COSMOS safety pass (Spaceship Build skill) before any later live enablement
 - Wire into `tool_server` OpenAPI only when Phase 1 is explicitly requested
 
 ### Phase 2 — Soft targets (live, gated)
