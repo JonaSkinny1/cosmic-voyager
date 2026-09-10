@@ -16,10 +16,14 @@ Tools:
   set_active_zone <ZONE>
   set_alert_level <nominal|caution|alert|general_quarters>
   set_viewport_mode <offline|sim|space|diagnostics>
+  list_devices
+  shutdown_device <device_id> confirm
+  wake_device <device_id> confirm
   get_ship_status
   quit
 Presets: ALERT_RED WARP_BLUE NEBULA_PURPLE STEALTH_DARK DEFAULT_WHITE
 F.R.A.N.K.: dry-run only — no pours
+Device power: DRY-RUN only — no WoL / HA / plugs / OS power
 """
 
 
@@ -59,11 +63,30 @@ def dispatch(line: str) -> str:
     if cmd == "set_viewport_mode" and len(parts) >= 2:
         return json.dumps(TOOL_MAP["set_viewport_mode"](parts[1]), indent=2)
 
+    if cmd == "list_devices":
+        return json.dumps(TOOL_MAP["list_devices"](), indent=2)
+
+    if cmd == "shutdown_device" and len(parts) >= 2:
+        device_id = parts[1]
+        confirm = len(parts) >= 3 and parts[2].lower() in ("confirm", "true", "yes")
+        return json.dumps(
+            TOOL_MAP["shutdown_device"](device_id, confirm, "dry-run"), indent=2
+        )
+
+    if cmd == "wake_device" and len(parts) >= 2:
+        device_id = parts[1]
+        confirm = len(parts) >= 3 and parts[2].lower() in ("confirm", "true", "yes")
+        return json.dumps(
+            TOOL_MAP["wake_device"](device_id, confirm, "dry-run"), indent=2
+        )
+
     return (
         "Unknown command. Try: set_lighting ALERT_RED 40 | "
         "set_zone_lighting Cantina NEBULA_PURPLE 35 | "
         "set_active_zone Observatory | set_alert_level caution | "
-        "set_viewport_mode space | get_ship_status | quit"
+        "set_viewport_mode space | list_devices | "
+        "shutdown_device host_pc confirm | wake_device host_pc confirm | "
+        "get_ship_status | quit"
         f"\nZones: {', '.join(ZONES)}"
     )
 
