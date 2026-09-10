@@ -45,6 +45,9 @@ set_active_zone Observatory
 set_alert_level caution
 set_viewport_mode space
 get_ship_status
+list_devices
+shutdown_device  # needs confirm via tool_server JSON
+wake_device
 ```
 
 Zones are **names only** (Bridge / Observatory / Cantina / Tech Bay / Cargo) â€” sector footages stay unlocked until posts are measured.
@@ -63,6 +66,18 @@ confirm
 ```
 
 Forced **dry-run** only: explicit `confirm` required; prints `would_pour` JSON; no pumps/GPIO/MQTT. `supervised-wet` is rejected. No face/RFID retention.
+
+
+## Device power (Phase 1 — dry-run)
+
+Allowlisted tools: `list_devices`, `shutdown_device`, `wake_device`.
+
+- **SIM / dry-run only** — updates in-memory device power state and prints `would_power`
+- **No** OS shutdown, Wake-on-LAN, Home Assistant, smart plugs, GPIO, or MQTT actuator publishes
+- `shutdown_device` / `wake_device` require `"confirm": true` (CLI: `shutdown_device host_pc confirm`)
+- Live power is backlog Phase 2+ — see [`docs/BACKLOG-device-power.md`](docs/BACKLOG-device-power.md)
+
+Via tool server (Open WebUI): POST `/list_devices`, `/shutdown_device`, `/wake_device` on `:8767`.
 
 ## Safety
 

@@ -1,7 +1,7 @@
 # Backlog — COSMOS device power control
 
 **Filed:** 2026-09-10 (Jonathan request via CoS)  
-**Status:** BACKLOG — do **not** implement live power until Jonathan asks for a phase.  
+**Status:** Phase 1 dry-run **IMPLEMENTED** (2026-09-10). Live power (Phase 2+) still blocked until Jonathan asks.  
 **Owner:** Spaceship Build / `orchestrator/tool_server.py` + future soft targets
 
 ## Goal
@@ -10,7 +10,9 @@ COSMOS gains **device power control** — shut down and start/wake devices — s
 
 ## Phased plan
 
-### Phase 1 — Software dry-run (safe to build when greenlit)
+### Phase 1 — Software dry-run (**done** — sim tools live in repo)
+
+Implemented: `list_devices` / `shutdown_device` / `wake_device` in `orchestrator/tools.py`, CLI, and `tool_server` OpenAPI.
 Allowlisted SIM tools only (in-memory / log `would_power`):
 
 | Tool | Intent |
