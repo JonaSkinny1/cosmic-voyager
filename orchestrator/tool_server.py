@@ -58,7 +58,7 @@ OPENAPI: Dict[str, Any] = {
     "info": {
         "title": "COSMOS Ship Tools (SIM)",
         "version": "0.1.0",
-        "description": "Allowlisted Cosmic Voyager sim tools. No actuators/pours.",
+        "description": "Allowlisted Cosmic Voyager sim tools. No actuators/pours. Device power is dry-run only.",
     },
     "servers": [{"url": f"http://{HOST}:{PORT}"}],
     "paths": {},
@@ -128,6 +128,54 @@ OPENAPI["paths"].update(
     )
 )
 
+DEVICE_IDS = [
+    "host_pc",
+    "ollama",
+    "open_webui",
+    "viewport_display",
+    "cantina_lights",
+    "frank_arm",
+]
+OPENAPI["paths"].update(
+    _post(
+        "/list_devices",
+        "list_devices",
+        "List allowlisted devices and dry-run power state (no live power)",
+        _obj({}),
+    )
+)
+OPENAPI["paths"]["/list_devices"]["post"]["requestBody"]["required"] = False
+OPENAPI["paths"].update(
+    _post(
+        "/shutdown_device",
+        "shutdown_device",
+        "DRY-RUN shutdown/sleep for an allowlisted device (confirm required; no OS/WoL/HA)",
+        _obj(
+            {
+                "device_id": {"type": "string", "enum": DEVICE_IDS},
+                "confirm": {"type": "boolean", "description": "Must be true"},
+                "mode": {"type": "string", "enum": ["dry-run"], "default": "dry-run"},
+            },
+            ["device_id", "confirm"],
+        ),
+    )
+)
+OPENAPI["paths"].update(
+    _post(
+        "/wake_device",
+        "wake_device",
+        "DRY-RUN wake/start for an allowlisted device (confirm required; no WoL/HA/plugs)",
+        _obj(
+            {
+                "device_id": {"type": "string", "enum": DEVICE_IDS},
+                "confirm": {"type": "boolean", "description": "Must be true"},
+                "mode": {"type": "string", "enum": ["dry-run"], "default": "dry-run"},
+            },
+            ["device_id", "confirm"],
+        ),
+    )
+)
+
 
 def _dispatch(path: str, body: Dict[str, Any]) -> Any:
     name = path.strip("/").split("/")[0]
@@ -150,6 +198,12 @@ def _dispatch(path: str, body: Dict[str, Any]) -> Any:
         return fn(body.get("level", "nominal"))
     if name == "set_viewport_mode":
         return fn(body.get("mode", "sim"))
+    if name == "list_devices":
+        return fn()
+    if name == "shutdown_device":
+        return fn(body.get("device_id", ""), body.get("confirm", False), body.get("mode", "dry-run"))
+    if name == "wake_device":
+        return fn(body.get("device_id", ""), body.get("confirm", False), body.get("mode", "dry-run"))
     return {"ok": False, "error": "unhandled"}
 
 
